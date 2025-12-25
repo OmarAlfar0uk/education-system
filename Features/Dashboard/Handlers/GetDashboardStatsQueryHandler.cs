@@ -1,24 +1,23 @@
-﻿using MediatR;
-using EduocationSystem.Domain;
+﻿using EduocationSystem.Domain;
 using EduocationSystem.Domain.Entities;
 using EduocationSystem.Domain.Interfaces;
 using EduocationSystem.Features.Dashboard.Dtos;
 using EduocationSystem.Features.Dashboard.Queries;
 using EduocationSystem.Shared.Responses;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace EduocationSystem.Features.Dashboard.Handlers
 {
     public class GetDashboardStatsQueryHandler
-       : IRequestHandler<GetDashboardStatsQuery, ServiceResponse<DashboardStatsDto>>
+        : IRequestHandler<GetDashboardStatsQuery, ServiceResponse<DashboardStatsDto>>
     {
         private readonly IGenericRepository<Exam> _examRepository;
         private readonly IGenericRepository<Question> _questionRepository;
         private readonly IGenericRepository<Category> _categoryRepository;
         private readonly IGenericRepository<UserExamAttempt> _userExamAttemptRepository;
-        private readonly IGenericRepository<ApplicationUser> _userRepo;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ICurrentUserService _currentUser;
 
         public GetDashboardStatsQueryHandler(
@@ -26,14 +25,14 @@ namespace EduocationSystem.Features.Dashboard.Handlers
             IGenericRepository<Question> questionRepository,
             IGenericRepository<Category> categoryRepository,
             IGenericRepository<UserExamAttempt> userExamAttemptRepository,
-            IGenericRepository<ApplicationUser> userRepo,
+            UserManager<ApplicationUser> userManager,
             ICurrentUserService currentUser)
         {
             _examRepository = examRepository;
             _questionRepository = questionRepository;
             _categoryRepository = categoryRepository;
             _userExamAttemptRepository = userExamAttemptRepository;
-            _userRepo = userRepo;
+            _userManager = userManager;
             _currentUser = currentUser;
         }
 
@@ -41,7 +40,7 @@ namespace EduocationSystem.Features.Dashboard.Handlers
             GetDashboardStatsQuery request,
             CancellationToken cancellationToken)
         {
-            // 🔒 Last line of defense
+            // 🔒 Admin only
             if (!_currentUser.IsInRole("Admin"))
             {
                 return ServiceResponse<DashboardStatsDto>.ForbiddenResponse(
@@ -49,35 +48,41 @@ namespace EduocationSystem.Features.Dashboard.Handlers
                     "الوصول متاح للمسؤول فقط");
             }
 
-            var totalExams = await _examRepository
-                .GetAll().CountAsync(e => !e.IsDeleted, cancellationToken);
+            var totalExams = await _examRepository.GetAll()
+                .CountAsync(e => !e.IsDeleted, cancellationToken);
 
-            var activeExams = await _examRepository
-                .GetAll().CountAsync(e => e.IsActive && !e.IsDeleted, cancellationToken);
+            var activeExams = await _examRepository.GetAll()
+                .CountAsync(e => e.IsActive && !e.IsDeleted, cancellationToken);
 
-            var inactiveExams = await _examRepository
-                .GetAll().CountAsync(e => !e.IsActive && !e.IsDeleted, cancellationToken);
+            var inactiveExams = await _examRepository.GetAll()
+                .CountAsync(e => !e.IsActive && !e.IsDeleted, cancellationToken);
 
-            var totalQuestions = await _questionRepository
-                .GetAll().CountAsync(q => !q.IsDeleted, cancellationToken);
+            var totalQuestions = await _questionRepository.GetAll()
+                .CountAsync(q => !q.IsDeleted, cancellationToken);
 
-            var totalCategories = await _categoryRepository
-                .GetAll().CountAsync(c => !c.IsDeleted, cancellationToken);
+            var totalCategories = await _categoryRepository.GetAll()
+                .CountAsync(c => !c.IsDeleted, cancellationToken);
 
-            var totalUsers = await _userRepo
-                .GetAll().CountAsync(u => u.EmailConfirmed, cancellationToken);
+            // ⭐ استخدام Identity بدل Repo
+            var totalUsers = await _userManager.Users
+                .CountAsync(u => u.EmailConfirmed, cancellationToken);
 
-            var totalExamAttempts = await _userExamAttemptRepository
-                .GetAll().CountAsync(a => !a.IsDeleted, cancellationToken);
+            var totalExamAttempts = await _userExamAttemptRepository.GetAll()
+                .CountAsync(a => !a.IsDeleted, cancellationToken);
 
             decimal averageScore = 0;
+
             var completedAttempts = _userExamAttemptRepository.GetAll()
-                .Where(a => !a.IsDeleted && a.FinishedAt.HasValue && a.TotalQuestions > 0);
+                .Where(a => !a.IsDeleted &&
+                            a.FinishedAt.HasValue &&
+                            a.TotalQuestions > 0);
 
             if (await completedAttempts.AnyAsync(cancellationToken))
             {
                 averageScore = await completedAttempts
-                    .AverageAsync(a => (decimal)a.Score / a.TotalQuestions * 100, cancellationToken);
+                    .AverageAsync(a =>
+                        (decimal)a.Score / a.TotalQuestions * 100,
+                        cancellationToken);
             }
 
             var stats = new DashboardStatsDto
@@ -98,5 +103,4 @@ namespace EduocationSystem.Features.Dashboard.Handlers
                 "تم استرجاع إحصائيات لوحة التحكم بنجاح");
         }
     }
-
 }

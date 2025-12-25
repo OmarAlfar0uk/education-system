@@ -18,5 +18,7 @@ namespace EduocationSystem.Domain.Entities
         public ICollection<ActivityLog>? ActivityLogs { get; set; }
         public ICollection<Report>? Reports { get; set; }
         public ICollection<ParentStudent>? ParentLinks { get; set; }
+        public ICollection<ParentStudent> ParentStudents { get; set; }
+
     }
 }

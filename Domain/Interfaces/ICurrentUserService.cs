@@ -5,5 +5,4 @@
         string? UserId { get; }
         bool IsInRole(string role);
     }
-
 }

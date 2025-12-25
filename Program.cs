@@ -8,6 +8,7 @@ using EduocationSystem.Features.Dashboard.Endpoints;
 using EduocationSystem.Features.Enrollment;
 using EduocationSystem.Features.Exams.Endpoints;
 using EduocationSystem.Features.Grade;
+using EduocationSystem.Features.Notification;
 using EduocationSystem.Features.Parent.Endpoints;
 using EduocationSystem.Features.Profile.Endpoints;
 using EduocationSystem.Features.Questions.Endpoints;
@@ -330,6 +331,7 @@ namespace EduocationSystem
             app.MapGradesEndpoints();
 
             // ===================== NOTIFICATIONS ======================
+            app.MapNotificationsEndpoints();
 
 
             #endregion
