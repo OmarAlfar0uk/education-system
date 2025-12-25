@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OnlineExam.Features.Categories.Dtos;
-using OnlineExam.Features.Categories.Queries;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Categories.Dtos;
+using EduocationSystem.Features.Categories.Queries;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Categories.Endpoints
+namespace EduocationSystem.Features.Categories.Endpoints
 {
     public static class GetCategoriesForAdminEndpoint
     {
@@ -23,7 +23,8 @@ namespace OnlineExam.Features.Categories.Endpoints
                 var result = await mediator.Send(new GetCategoriesQueryForAdmin(pageNumber, pageSize, search, sortBy));
                 return result;
             })
-            .RequireAuthorization()
+             .RequireAuthorization("AdminOnly")
+            
             .WithName("GetCategoriesForAdmin")
             .WithTags("Categories")
             .Produces<ServiceResponse<PagedResult<AdminCategoryDto>>>(StatusCodes.Status200OK)

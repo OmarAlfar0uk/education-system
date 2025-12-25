@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
-using OnlineExam.Domain.Interfaces;
-using OnlineExam.Infrastructure.ApplicationDBContext;
+using EduocationSystem.Domain.Interfaces;
+using EduocationSystem.Infrastructure.ApplicationDBContext;
 
-namespace OnlineExam.Infrastructure.UnitOfWork
+namespace EduocationSystem.Infrastructure.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

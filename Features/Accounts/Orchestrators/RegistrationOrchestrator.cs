@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using OnlineExam.Features.Accounts.Commands;
-using OnlineExam.Features.Accounts.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Accounts.Commands;
+using EduocationSystem.Features.Accounts.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Accounts.Orchestrators
+namespace EduocationSystem.Features.Accounts.Orchestrators
 {
     public record OrchestrateRegistrationCommand(RegisterDto RegisterDto) : IRequest<ServiceResponse<bool>>
     {

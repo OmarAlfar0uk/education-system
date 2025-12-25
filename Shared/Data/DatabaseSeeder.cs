@@ -1,16 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using OnlineExam.Domain;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Domain.Enums;
-using OnlineExam.Infrastructure.ApplicationDBContext;
+using EduocationSystem.Domain;
+using EduocationSystem.Domain.Entities;
+using EduocationSystem.Domain.Enums;
+using EduocationSystem.Infrastructure.ApplicationDBContext;
 using TechZone.Core.Entities;
 
-namespace OnlineExam.Shared.Data
+namespace EduocationSystem.Shared.Data
 {
     public static class DatabaseSeeder
     {
         public static async Task SeedAsync(IServiceProvider sp)
         {
+
+
+
+
             // 0) Roles & Admin & Users
             await SeedRolesAndUsersAsync(sp);
 
@@ -36,14 +40,18 @@ namespace OnlineExam.Shared.Data
             var roleManager = sp.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = sp.GetRequiredService<UserManager<ApplicationUser>>();
 
-            string[] roles = { "Admin", "User" };
+            // 1️⃣ Roles
+            string[] roles = { "Admin", "Student", "Parent" };
             foreach (var role in roles)
+            {
                 if (!await roleManager.RoleExistsAsync(role))
                     await roleManager.CreateAsync(new IdentityRole(role));
+            }
 
-            // Admin User
+            // 2️⃣ Super Admin
             var adminEmail = "admin@onlineexam.com";
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
+
             if (adminUser == null)
             {
                 var admin = new ApplicationUser
@@ -56,20 +64,23 @@ namespace OnlineExam.Shared.Data
                     ImageUrl = "/uploads/admin-avatar.png",
                     EmailConfirmed = true
                 };
+
                 var result = await userManager.CreateAsync(admin, "Admin@123");
                 if (result.Succeeded)
+                {
                     await userManager.AddToRoleAsync(admin, "Admin");
+                }
             }
 
-            // Regular Users
+            // 3️⃣ Regular Users → Students
             var users = new[]
             {
-                new { UserName = "john.doe", Email = "john.doe@example.com", FirstName = "John", LastName = "Doe", Phone = "+1234567891" },
-                new { UserName = "jane.smith", Email = "jane.smith@example.com", FirstName = "Jane", LastName = "Smith", Phone = "+1234567892" },
-                new { UserName = "mike.wilson", Email = "mike.wilson@example.com", FirstName = "Mike", LastName = "Wilson", Phone = "+1234567893" },
-                new { UserName = "sarah.jones", Email = "sarah.jones@example.com", FirstName = "Sarah", LastName = "Jones", Phone = "+1234567894" },
-                new { UserName = "alex.brown", Email = "alex.brown@example.com", FirstName = "Alex", LastName = "Brown", Phone = "+1234567895" }
-            };
+        new { UserName = "john.doe", Email = "john.doe@example.com", FirstName = "John", LastName = "Doe", Phone = "+1234567891" },
+        new { UserName = "jane.smith", Email = "jane.smith@example.com", FirstName = "Jane", LastName = "Smith", Phone = "+1234567892" },
+        new { UserName = "mike.wilson", Email = "mike.wilson@example.com", FirstName = "Mike", LastName = "Wilson", Phone = "+1234567893" },
+        new { UserName = "sarah.jones", Email = "sarah.jones@example.com", FirstName = "Sarah", LastName = "Jones", Phone = "+1234567894" },
+        new { UserName = "alex.brown", Email = "alex.brown@example.com", FirstName = "Alex", LastName = "Brown", Phone = "+1234567895" }
+    };
 
             foreach (var userInfo in users)
             {
@@ -86,12 +97,16 @@ namespace OnlineExam.Shared.Data
                         ImageUrl = $"/uploads/{userInfo.UserName}-avatar.png",
                         EmailConfirmed = true
                     };
-                    var result = await userManager.CreateAsync(user, "User@123");
+
+                    var result = await userManager.CreateAsync(user, "Student@123");
                     if (result.Succeeded)
-                        await userManager.AddToRoleAsync(user, "User");
+                    {
+                        await userManager.AddToRoleAsync(user, "Student");
+                    }
                 }
             }
         }
+
 
         // ====== 1) Seed Categories ======
         private static async Task SeedCategoriesAsync(ApplicationDbContext context)
@@ -389,6 +404,10 @@ namespace OnlineExam.Shared.Data
 
             // Shuffle the choices to make it more realistic
             return choices.OrderBy(x => random.Next()).ToList();
+
+
+
+
         }
     }
 }

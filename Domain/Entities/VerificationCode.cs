@@ -1,4 +1,4 @@
-﻿using OnlineExam.Domain;
+﻿using EduocationSystem.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Features.Categories.Dtos
+﻿namespace EduocationSystem.Features.Categories.Dtos
 {
     public class CategoryDetailsDto
     {

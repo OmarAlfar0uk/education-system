@@ -1,6 +1,6 @@
-﻿using OnlineExam.Domain.Interfaces;
+﻿using EduocationSystem.Domain.Interfaces;
 
-namespace OnlineExam.Middlewares
+namespace EduocationSystem.Middlewares
 {
     public class TransactionMiddleware : IMiddleware
     {

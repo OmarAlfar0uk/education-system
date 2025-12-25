@@ -1,12 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using OnlineExam.Domain;
-using OnlineExam.Features.Profile.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Features.Profile.Dtos;
+using EduocationSystem.Shared.Responses;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
-namespace OnlineExam.Features.Profile.Queries
+namespace EduocationSystem.Features.Profile.Queries
 {
     public record GetProfileQuery : IRequest<ServiceResponse<ProfileDto>>;
 

@@ -1,12 +1,12 @@
 ﻿using Humanizer;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using OnlineExam.Domain;
-using OnlineExam.Features.Accounts.Dtos;
-using OnlineExam.Shared.Helpers;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Features.Accounts.Dtos;
+using EduocationSystem.Shared.Helpers;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Accounts.Commands
+namespace EduocationSystem.Features.Accounts.Commands
 {
     public record RegisterCommand(RegisterDto RegisterDto) : IRequest<ServiceResponse<ApplicationUser>>
     {

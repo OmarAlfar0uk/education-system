@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using OnlineExam.Features.Categories.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Categories.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Categories.Commands
+namespace EduocationSystem.Features.Categories.Commands
 {
     public record CreateCategoryCommand(createCategoryDTo CreateCategoryDTo) : IRequest<ServiceResponse<int>>;
 }

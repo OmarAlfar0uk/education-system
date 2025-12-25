@@ -1,15 +1,15 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using OnlineExam.Domain;
-using OnlineExam.Features.Accounts.Dtos;
-using OnlineExam.Infrastructure.ApplicationDBContext;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Features.Accounts.Dtos;
+using EduocationSystem.Infrastructure.ApplicationDBContext;
+using EduocationSystem.Shared.Responses;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnlineExam.Features.Accounts.Commands
+namespace EduocationSystem.Features.Accounts.Commands
 {
     public record VerifyCodeCommand(string UserId, string Code, VerificationCodeType CodeType)
         : IRequest<ServiceResponse<bool>>

@@ -2,17 +2,17 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using OnlineExam.Domain;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Features.Accounts.Dtos;
-using OnlineExam.Shared.Helpers;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Domain.Entities;
+using EduocationSystem.Features.Accounts.Dtos;
+using EduocationSystem.Shared.Helpers;
+using EduocationSystem.Shared.Responses;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace OnlineExam.Features.Accounts.Commands
+namespace EduocationSystem.Features.Accounts.Commands
 {
     public record LoginCommand(LoginReqDTO LoginDTO) : IRequest<ServiceResponse<UserDto>>;
 

@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Features.Exams.Dtos
+﻿namespace EduocationSystem.Features.Exams.Dtos
 {
     public class AdminExamDto
     {

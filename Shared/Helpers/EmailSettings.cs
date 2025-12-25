@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Shared.Helpers
+﻿namespace EduocationSystem.Shared.Helpers
 {
     public class EmailSettings
     {

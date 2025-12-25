@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnlineExam.Domain;
-using OnlineExam.Domain.Enums;
+using EduocationSystem.Domain;
+using EduocationSystem.Domain.Enums;
 
-namespace OnlineExam.Infrastructure.EntityConfigurations
+namespace EduocationSystem.Infrastructure.EntityConfigurations
 {
     public class QuestionConfiguration : IEntityTypeConfiguration<Question>
     {

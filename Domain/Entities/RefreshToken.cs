@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace OnlineExam.Domain.Entities
+namespace EduocationSystem.Domain.Entities
 {
     [Owned]
     public class RefreshToken

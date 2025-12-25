@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using OnlineExam.Features.Questions.Commands;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Questions.Commands;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Questions.Endpoints
+namespace EduocationSystem.Features.Questions.Endpoints
 {
     public static class DeleteQuestionEndpoint
     {

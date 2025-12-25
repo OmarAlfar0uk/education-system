@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using OnlineExam.Features.Exams.Commands;
-using OnlineExam.Features.Exams.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Exams.Commands;
+using EduocationSystem.Features.Exams.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Exams.Endpoints
+namespace EduocationSystem.Features.Exams.Endpoints
 {
     public static class StartExamAttemptEndpoint
     {
@@ -14,11 +14,15 @@ namespace OnlineExam.Features.Exams.Endpoints
                 var result = await mediator.Send(new StartExamAttemptCommand(id));
                 return Results.Json(result, statusCode: result.StatusCode);
             })
+            .RequireAuthorization("AdminOrStudent")   // ⭐ Admin + Student
             .WithName("StartExamAttempt")
             .WithTags("Exams")
             .Produces<ServiceResponse<List<QuestionDto>>>(StatusCodes.Status200OK)
             .Produces<ServiceResponse<List<QuestionDto>>>(StatusCodes.Status400BadRequest)
+            .Produces<ServiceResponse<List<QuestionDto>>>(StatusCodes.Status401Unauthorized)
+            .Produces<ServiceResponse<List<QuestionDto>>>(StatusCodes.Status403Forbidden)
             .Produces<ServiceResponse<List<QuestionDto>>>(StatusCodes.Status404NotFound);
         }
     }
+
 }

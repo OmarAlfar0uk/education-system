@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using OnlineExam.Features.UserAnswers.Dtos;
-using OnlineExam.Features.UserAnswers.Queries;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.UserAnswers.Dtos;
+using EduocationSystem.Features.UserAnswers.Queries;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.UserAnswers.Endpoints
+namespace EduocationSystem.Features.UserAnswers.Endpoints
 {
     public static class GetDetailedUserAnswer
     {

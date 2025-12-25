@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using OnlineExam.Features.Questions.Commands;
-using OnlineExam.Features.Questions.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Questions.Commands;
+using EduocationSystem.Features.Questions.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Questions.Endpoints
+namespace EduocationSystem.Features.Questions.Endpoints
 {
     public static class UpdateQuestionEndpoint
     {

@@ -1,14 +1,14 @@
 ﻿using MediatR;
-using OnlineExam.Domain;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Domain.Interfaces;
-using OnlineExam.Features.UserAnswers.Dtos;
-using OnlineExam.Features.UserAnswers.Queries;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Domain.Entities;
+using EduocationSystem.Domain.Interfaces;
+using EduocationSystem.Features.UserAnswers.Dtos;
+using EduocationSystem.Features.UserAnswers.Queries;
+using EduocationSystem.Shared.Responses;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace OnlineExam.Features.UserAnswers.Handlers
+namespace EduocationSystem.Features.UserAnswers.Handlers
 {
     public class GetUserAnswerHistoryQueryHandler : IRequestHandler<GetUserAnswerHistoryQuery, ServiceResponse<PagedUserAnswerHistoryDto>>
     {

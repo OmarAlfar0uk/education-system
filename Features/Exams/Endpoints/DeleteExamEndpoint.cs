@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OnlineExam.Features.Exams.Commands;
-using OnlineExam.Features.Exams.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Exams.Commands;
+using EduocationSystem.Features.Exams.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Exams.Endpoints
+namespace EduocationSystem.Features.Exams.Endpoints
 {
     public static class DeleteExamEndpoint
     {
@@ -17,6 +17,8 @@ namespace OnlineExam.Features.Exams.Endpoints
                 var result = await mediator.Send(new DeleteExamCommand(dto));
                 return Results.Ok(result);
             })
+
+                .RequireAuthorization("AdminOnly")
             .WithTags("Exams")
             .WithSummary("Soft delete an exam and its related questions")
             .Produces<ServiceResponse<bool>>(StatusCodes.Status200OK)

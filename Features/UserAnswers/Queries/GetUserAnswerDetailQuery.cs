@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using OnlineExam.Features.UserAnswers.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.UserAnswers.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.UserAnswers.Queries
+namespace EduocationSystem.Features.UserAnswers.Queries
 {
     public record GetUserAnswerDetailQuery(int AttemptId) : IRequest<ServiceResponse<UserAnswerDetailDto>>;
 }

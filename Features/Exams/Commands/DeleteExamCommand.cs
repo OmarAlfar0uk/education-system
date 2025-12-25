@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using OnlineExam.Shared.Responses;
-using OnlineExam.Features.Exams.Dtos;
+using EduocationSystem.Shared.Responses;
+using EduocationSystem.Features.Exams.Dtos;
 
-namespace OnlineExam.Features.Exams.Commands
+namespace EduocationSystem.Features.Exams.Commands
 {
     public record DeleteExamCommand(DeleteExamDto DeleteExamDto) : IRequest<ServiceResponse<bool>>;
 }

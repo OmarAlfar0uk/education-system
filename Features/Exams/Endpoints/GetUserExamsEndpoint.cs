@@ -1,19 +1,19 @@
 ﻿using MediatR;
-using OnlineExam.Features.Exams.Dtos;
-using OnlineExam.Features.Exams.Queries;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Exams.Dtos;
+using EduocationSystem.Features.Exams.Queries;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Exams.Endpoints
+namespace EduocationSystem.Features.Exams.Endpoints
 {
     public static class GetUserExamsEndpoint
     {
         public static void MapUserExamEndpoints(this WebApplication app)
         {
             var group = app.MapGroup("/api/exams")
-                .WithTags("Exams");
-                
+                .WithTags("Exams")
+                .RequireAuthorization("AdminOrStudent");   // ⭐ Admin + Student
 
-            // GET /api/exams - List exams (with optional category filter)
+            // GET /api/exams - List exams (with optional filters)
             group.MapGet("/", async (
                 IMediator mediator,
                 [AsParameters] GetExamsQuery query) =>
@@ -22,9 +22,10 @@ namespace OnlineExam.Features.Exams.Endpoints
                 return Results.Json(result, statusCode: result.StatusCode);
             })
             .WithName("GetExams")
-            .Produces<ServiceResponse<PagedResult<UserExamDto>>>(StatusCodes.Status200OK);
-
-            
+            .Produces<ServiceResponse<PagedResult<UserExamDto>>>(StatusCodes.Status200OK)
+            .Produces<ServiceResponse<PagedResult<UserExamDto>>>(StatusCodes.Status401Unauthorized)
+            .Produces<ServiceResponse<PagedResult<UserExamDto>>>(StatusCodes.Status403Forbidden);
         }
     }
+
 }

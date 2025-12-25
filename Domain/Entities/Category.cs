@@ -1,7 +1,7 @@
-﻿using OnlineExam.Domain.Entities;
+﻿using EduocationSystem.Domain.Entities;
 using System;
 
-namespace OnlineExam.Domain
+namespace EduocationSystem.Domain
 {
     public class Category : BaseEntity
     {
@@ -11,5 +11,9 @@ namespace OnlineExam.Domain
 
         // navigation property
         public virtual ICollection<Exam>? Exams { get; set; }
+
+        // Each Category can have many Courses
+        public ICollection<Course>? Courses { get; set; }
+
     }
 }

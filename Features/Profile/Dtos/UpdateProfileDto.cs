@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Features.Profile.Dtos
+﻿namespace EduocationSystem.Features.Profile.Dtos
 {
     public class UpdateProfileDto
     {

@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using OnlineExam.Features.Categories.Dtos;
-using OnlineExam.Features.Categories.Queries;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Categories.Dtos;
+using EduocationSystem.Features.Categories.Queries;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Categories.Endpoints
+namespace EduocationSystem.Features.Categories.Endpoints
 {
     public static class GetCategoryByIdEndpoint
     {
@@ -15,6 +15,8 @@ namespace OnlineExam.Features.Categories.Endpoints
                 return result;
             })
             //.RequireAuthorization()
+
+            .RequireAuthorization("AdminOrStudent")
             .WithName("GetCategoryById")
             .WithTags("Categories")
             .Produces<ServiceResponse<object>>(StatusCodes.Status200OK)

@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using OnlineExam.Features.Profile.Queries;
+using EduocationSystem.Features.Profile.Queries;
 
-namespace OnlineExam.Features.Profile.Endpoints
+namespace EduocationSystem.Features.Profile.Endpoints
 {
     public static class GetProfileEndpoint
     {

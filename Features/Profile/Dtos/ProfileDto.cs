@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineExam.Features.Profile.Dtos
+namespace EduocationSystem.Features.Profile.Dtos
 {
     public class ProfileDto
     {

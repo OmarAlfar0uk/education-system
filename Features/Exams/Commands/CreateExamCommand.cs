@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using OnlineExam.Features.Exams.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Exams.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Exams.Commands
+namespace EduocationSystem.Features.Exams.Commands
 {
     public record CreateExamCommand(CreateExamDto CreateExamDto) : IRequest<ServiceResponse<int>>;
 

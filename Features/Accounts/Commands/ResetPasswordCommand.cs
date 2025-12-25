@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using OnlineExam.Domain;
-using OnlineExam.Features.Accounts.Dtos;
-using OnlineExam.Infrastructure.ApplicationDBContext;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Features.Accounts.Dtos;
+using EduocationSystem.Infrastructure.ApplicationDBContext;
+using EduocationSystem.Shared.Responses;
 using TechZone.Core.Entities;
 
-namespace OnlineExam.Features.Accounts.Commands
+namespace EduocationSystem.Features.Accounts.Commands
 {
     public record ResetPasswordCommand(ResetPasswordDto Dto) : IRequest<ServiceResponse<bool>>
     {

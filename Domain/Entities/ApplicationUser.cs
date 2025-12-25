@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using OnlineExam.Domain.Entities;
+﻿using EduocationSystem.Domain.Entities;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Pipelines.Sockets.Unofficial.Arenas;
 using System.ComponentModel.DataAnnotations;
 using TechZone.Core.Entities;
 
-namespace OnlineExam.Domain
+namespace EduocationSystem.Domain
 {
     public class ApplicationUser : IdentityUser
     {
@@ -21,6 +23,13 @@ namespace OnlineExam.Domain
         public virtual ICollection<VerificationCode> VerificationCodes { get; set; } = new List<VerificationCode>();
 
 
+        public Student? StudentProfile { get; set; }
+
+        public Parent? ParentProfile { get; set; }
+
+        public Instructor? InstructorProfile { get; set; }
+
+        public ICollection<Notification>? Notifications { get; set; }
 
     }
 }

@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Questions.Commands
+namespace EduocationSystem.Features.Questions.Commands
 {
     public record DeleteQuestionCommand(int QuestionId) : IRequest<ServiceResponse<bool>>;
 }

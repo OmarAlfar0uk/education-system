@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 
-namespace OnlineExam.Domain.Interfaces
+namespace EduocationSystem.Domain.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using OnlineExam.Features.Profile.Commands;
-using OnlineExam.Features.Profile.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Profile.Commands;
+using EduocationSystem.Features.Profile.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Profile.Endpoints
+namespace EduocationSystem.Features.Profile.Endpoints
 {
     public static class UpdateProfileEndpoint
     {

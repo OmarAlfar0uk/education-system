@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using OnlineExam.Domain;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Features.Accounts.Dtos;
-using OnlineExam.Infrastructure.ApplicationDBContext;
-using OnlineExam.Shared.Helpers;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Domain.Entities;
+using EduocationSystem.Features.Accounts.Dtos;
+using EduocationSystem.Infrastructure.ApplicationDBContext;
+using EduocationSystem.Shared.Helpers;
+using EduocationSystem.Shared.Responses;
 using System.Text.Json;
 using TechZone.Core.Entities;
 
-namespace OnlineExam.Features.Accounts.Commands
+namespace EduocationSystem.Features.Accounts.Commands
 {
     public record SendVerificationEmailCommand(ResendVerificationCodeDto Dto)
         : IRequest<ServiceResponse<bool>>;
@@ -233,7 +233,7 @@ namespace OnlineExam.Features.Accounts.Commands
             try
             {
                 using var emailMessage = new MimeMessage();
-                emailMessage.From.Add(new MailboxAddress(_emailSettings.FromName ?? "OnlineExam", _emailSettings.FromEmail));
+                emailMessage.From.Add(new MailboxAddress(_emailSettings.FromName ?? "EducationalSystem", _emailSettings.FromEmail));
                 emailMessage.To.Add(new MailboxAddress(emailItem.ToName ?? "", emailItem.ToEmail));
                 emailMessage.Subject = emailItem.Subject;
 

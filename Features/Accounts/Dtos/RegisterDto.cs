@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineExam.Features.Accounts.Dtos
+namespace EduocationSystem.Features.Accounts.Dtos
 {
     public class RegisterDto
     {

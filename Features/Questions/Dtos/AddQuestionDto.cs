@@ -1,7 +1,7 @@
-﻿using OnlineExam.Domain.Enums;
+﻿using EduocationSystem.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace OnlineExam.Features.Questions.Dtos
+namespace EduocationSystem.Features.Questions.Dtos
 {
     public class AddQuestionDto
     {

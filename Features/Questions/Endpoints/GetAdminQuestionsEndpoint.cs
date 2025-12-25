@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using OnlineExam.Features.Questions.Dtos;
-using OnlineExam.Features.Questions.Queries;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Questions.Dtos;
+using EduocationSystem.Features.Questions.Queries;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Questions.Endpoints
+namespace EduocationSystem.Features.Questions.Endpoints
 {
     public static class GetAdminQuestionsEndpoint
     {

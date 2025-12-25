@@ -1,11 +1,11 @@
 ﻿using MediatR;
-using OnlineExam.Domain;
-using OnlineExam.Domain.Interfaces;
-using OnlineExam.Features.Exams.Dtos;
-using OnlineExam.Features.Exams.Queries;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Domain.Interfaces;
+using EduocationSystem.Features.Exams.Dtos;
+using EduocationSystem.Features.Exams.Queries;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Exams.Handlers
+namespace EduocationSystem.Features.Exams.Handlers
 {
     public class GetExamDetailsQueryHandler : IRequestHandler<GetExamDetailsQuery, ServiceResponse<UserExamDetailsDto>>
     {

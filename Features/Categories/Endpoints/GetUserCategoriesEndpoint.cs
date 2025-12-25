@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OnlineExam.Features.Categories.Queries;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Categories.Queries;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Categories.Endpoints
+namespace EduocationSystem.Features.Categories.Endpoints
 {
     public static class GetUserCategoriesEndpoint
     {
@@ -19,6 +19,8 @@ namespace OnlineExam.Features.Categories.Endpoints
                 return result;
             })
             //.RequireAuthorization()
+            .RequireAuthorization("AdminOrStudent")
+
             .WithName("GetUserCategories")
             .WithTags("Categories")
             .Produces<ServiceResponse<object>>(StatusCodes.Status200OK)

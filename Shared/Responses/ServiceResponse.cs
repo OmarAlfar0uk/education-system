@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Shared.Responses
+﻿namespace EduocationSystem.Shared.Responses
 {
     /// <summary>
     /// Generic service response wrapper for consistent API responses

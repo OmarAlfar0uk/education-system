@@ -1,14 +1,14 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using OnlineExam.Domain;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Domain.Interfaces;
-using OnlineExam.Features.Exams.Commands;
-using OnlineExam.Features.Exams.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Domain.Entities;
+using EduocationSystem.Domain.Interfaces;
+using EduocationSystem.Features.Exams.Commands;
+using EduocationSystem.Features.Exams.Dtos;
+using EduocationSystem.Shared.Responses;
 using System.Security.Claims;
 
-namespace OnlineExam.Features.Exams.Handlers
+namespace EduocationSystem.Features.Exams.Handlers
 {
     public class SubmitExamCommandHandler : IRequestHandler<SubmitExamCommand, ServiceResponse<ExamResultDto>>
     {

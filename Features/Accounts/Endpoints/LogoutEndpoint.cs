@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using OnlineExam.Features.Accounts.Commands;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Accounts.Commands;
+using EduocationSystem.Shared.Responses;
 using System.Security.Claims;
 
-namespace OnlineExam.Features.Accounts.Endpoints
+namespace EduocationSystem.Features.Accounts.Endpoints
 {
     public static class LogoutEndpoint
     {

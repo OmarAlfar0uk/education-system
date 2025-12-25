@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnlineExam.Domain;
+using EduocationSystem.Domain;
 using System.Reflection.Emit;
 
-namespace OnlineExam.Infrastructure.EntityConfigurations
+namespace EduocationSystem.Infrastructure.EntityConfigurations
 {
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

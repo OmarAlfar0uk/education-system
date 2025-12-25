@@ -1,7 +1,7 @@
-﻿using OnlineExam.Shared.Responses;
+﻿using EduocationSystem.Shared.Responses;
 using System.Text.Json;
 
-namespace OnlineExam.Middlewares
+namespace EduocationSystem.Middlewares
 {
     public class FormContentTypeValidationMiddleware
     {

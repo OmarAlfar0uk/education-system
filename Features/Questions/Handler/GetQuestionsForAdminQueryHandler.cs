@@ -1,15 +1,15 @@
 ﻿using MediatR;
-using OnlineExam.Domain;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Domain.Enums;
-using OnlineExam.Domain.Interfaces;
-using OnlineExam.Features.Questions.Dtos;
-using OnlineExam.Features.Questions.Queries;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Domain.Entities;
+using EduocationSystem.Domain.Enums;
+using EduocationSystem.Domain.Interfaces;
+using EduocationSystem.Features.Questions.Dtos;
+using EduocationSystem.Features.Questions.Queries;
+using EduocationSystem.Shared.Responses;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 
-namespace OnlineExam.Features.Questions.Handlers
+namespace EduocationSystem.Features.Questions.Handlers
 {
     public class GetQuestionsForAdminQueryHandler : IRequestHandler<GetQuestionsForAdminQuery, ServiceResponse<PagedResult<AdminQuestionDto>>>
     {

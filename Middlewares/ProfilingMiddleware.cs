@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace OnlineExam.Middlewares
+namespace EduocationSystem.Middlewares
 {
 
     public class ProfilingMiddleware

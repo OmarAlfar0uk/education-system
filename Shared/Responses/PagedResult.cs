@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineExam.Shared.Responses
+namespace EduocationSystem.Shared.Responses
 {
     /// <summary>
     /// Sorting direction enumeration

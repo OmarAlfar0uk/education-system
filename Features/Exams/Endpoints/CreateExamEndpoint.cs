@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OnlineExam.Features.Exams.Commands;
-using OnlineExam.Features.Exams.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Exams.Commands;
+using EduocationSystem.Features.Exams.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Exams.Endpoints
+namespace EduocationSystem.Features.Exams.Endpoints
 {
     public static class CreateExamEndpoint
     {
@@ -68,6 +68,7 @@ namespace OnlineExam.Features.Exams.Endpoints
                 }
             })
             .DisableAntiforgery()
+            .RequireAuthorization("AdminOnly")
             .WithName("CreateExam")
             .WithTags("Exams")
             .Produces<ServiceResponse<int>>(StatusCodes.Status200OK)

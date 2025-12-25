@@ -1,12 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using OnlineExam.Domain;
-using OnlineExam.Features.Profile.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Features.Profile.Dtos;
+using EduocationSystem.Shared.Responses;
 using System.Security.Claims;
 
-namespace OnlineExam.Features.Profile.Commands
+namespace EduocationSystem.Features.Profile.Commands
 {
     public record UpdateProfileCommand(UpdateProfileDto Dto) : IRequest<ServiceResponse<bool>>;
 

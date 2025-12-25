@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using OnlineExam.Features.Accounts.Commands;
+using EduocationSystem.Features.Accounts.Commands;
 using System.Net;
 
-namespace OnlineExam.Features.Accounts.Endpoints
+namespace EduocationSystem.Features.Accounts.Endpoints
 {
     public static class TestEndpoint
     {

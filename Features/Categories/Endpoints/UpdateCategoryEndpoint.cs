@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OnlineExam.Features.Categories.Commands;
-using OnlineExam.Features.Categories.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Categories.Commands;
+using EduocationSystem.Features.Categories.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Categories.Endpoints
+namespace EduocationSystem.Features.Categories.Endpoints
 {
     public static class UpdateCategoryEndpoint
     {
@@ -67,7 +67,9 @@ namespace OnlineExam.Features.Categories.Endpoints
                     );
                 }
             })
+
             .DisableAntiforgery()
+                .RequireAuthorization("AdminOnly")
             .WithName("UpdateCategory")
             .WithTags("Categories")
             .Produces<ServiceResponse<int>>(StatusCodes.Status200OK)

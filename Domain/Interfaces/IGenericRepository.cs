@@ -1,7 +1,7 @@
 ﻿using MailKit.Search;
 using System.Linq.Expressions;
 
-namespace OnlineExam.Domain.Interfaces
+namespace EduocationSystem.Domain.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {

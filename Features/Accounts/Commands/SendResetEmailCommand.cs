@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Infrastructure.ApplicationDBContext;
-using OnlineExam.Shared.Helpers;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain.Entities;
+using EduocationSystem.Infrastructure.ApplicationDBContext;
+using EduocationSystem.Shared.Helpers;
+using EduocationSystem.Shared.Responses;
 using System.Text.Json;
 
-namespace OnlineExam.Features.Accounts.Commands
+namespace EduocationSystem.Features.Accounts.Commands
 {
     public record SendResetEmailCommand(string Email, string ResetCode) : IRequest<ServiceResponse<bool>>
     {
@@ -32,7 +32,7 @@ namespace OnlineExam.Features.Accounts.Commands
             {
                 try
                 {
-                    var subject = "Reset Your Password - OnlineExam";
+                    var subject = "Reset Your Password - EducationalSystem";
                     var body = GetPasswordResetTemplate(request.ResetCode);
 
                     // Queue the email
@@ -89,8 +89,8 @@ namespace OnlineExam.Features.Accounts.Commands
                     </head>
                     <body>
                         <div class='container'>
-                            <h2>OnlineExam - Password Reset Request</h2>
-                            <p>We received a request to reset your password for your OnlineExam account.</p>
+                            <h2>Educational System - Password Reset Request</h2>
+                            <p>We received a request to reset your password for your Educational System account.</p>
                             <p>Use the following code to reset your password:</p>
                             
                             <div class='code-box'>
@@ -106,7 +106,7 @@ namespace OnlineExam.Features.Accounts.Commands
                             
                             <div class='footer'>
                                 <p>This is an automated email. Please do not reply.</p>
-                                <p>&copy; 2025 OnlineExam. All rights reserved.</p>
+                                <p>&copy; 2025 Educational System. All rights reserved.</p>
                             </div>
                         </div>
                     </body>
@@ -153,7 +153,7 @@ namespace OnlineExam.Features.Accounts.Commands
                     }
 
                     using var emailMessage = new MimeMessage();
-                    emailMessage.From.Add(new MailboxAddress(_emailSettings.FromName ?? "OnlineExam", _emailSettings.FromEmail));
+                    emailMessage.From.Add(new MailboxAddress(_emailSettings.FromName ?? "EducationalSystem", _emailSettings.FromEmail));
                     emailMessage.To.Add(new MailboxAddress(emailItem.ToName ?? "", emailItem.ToEmail));
                     emailMessage.Subject = emailItem.Subject;
 

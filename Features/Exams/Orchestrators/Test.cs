@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Features.Exams.Orchestrators
+﻿namespace EduocationSystem.Features.Exams.Orchestrators
 {
     public class Test
     {

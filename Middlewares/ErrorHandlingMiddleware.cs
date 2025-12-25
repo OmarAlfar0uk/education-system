@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
 
-namespace OnlineExam.Middlewares
+namespace EduocationSystem.Middlewares
 {
 
     public class ErrorHandlingMiddleware

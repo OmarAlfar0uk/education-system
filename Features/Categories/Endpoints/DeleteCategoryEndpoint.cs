@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using OnlineExam.Features.Categories.Commands;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Categories.Commands;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Categories.Endpoints
+namespace EduocationSystem.Features.Categories.Endpoints
 {
     public static class DeleteCategoryEndpoint
     {
@@ -13,6 +13,7 @@ namespace OnlineExam.Features.Categories.Endpoints
                 var result = await mediator.Send(new DeleteCategoryCommand(id));
                 return result;
             })
+            .RequireAuthorization("AdminOnly")
             .WithName("DeleteCategory")
             .WithTags("Categories")
             .Produces<ServiceResponse<bool>>(StatusCodes.Status200OK)

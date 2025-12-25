@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using OnlineExam.Features.Dashboard.Dtos;
-using OnlineExam.Features.Dashboard.Queries;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Dashboard.Dtos;
+using EduocationSystem.Features.Dashboard.Queries;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Dashboard.Endpoints
+namespace EduocationSystem.Features.Dashboard.Endpoints
 {
     public static class MostActiveExamsEndpoint
     {
@@ -11,7 +11,7 @@ namespace OnlineExam.Features.Dashboard.Endpoints
         {
             var group = app.MapGroup("/api/admin/dashboard")
                 .WithTags("Admin Dashboard")
-                .RequireAuthorization();
+                    .RequireAuthorization("AdminOnly");
 
             // GET /api/admin/dashboard/most-active-exams - Data for graph of most active exams
             group.MapGet("/most-active-exams", async (IMediator mediator) =>

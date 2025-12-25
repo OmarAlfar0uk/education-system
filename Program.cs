@@ -1,41 +1,45 @@
-﻿using FluentValidation;
+﻿using EduocationSystem.Domain;
+using EduocationSystem.Domain.Entities;
+using EduocationSystem.Domain.Interfaces;
+using EduocationSystem.Features.Accounts.Endpoints;
+using EduocationSystem.Features.Attendance.Endpoints;
+using EduocationSystem.Features.Categories.Endpoints;
+using EduocationSystem.Features.Dashboard.Endpoints;
+using EduocationSystem.Features.Enrollment;
+using EduocationSystem.Features.Exams.Endpoints;
+using EduocationSystem.Features.Grade;
+using EduocationSystem.Features.Parent.Endpoints;
+using EduocationSystem.Features.Profile.Endpoints;
+using EduocationSystem.Features.Questions.Endpoints;
+using EduocationSystem.Features.Students.Endpoints;
+using EduocationSystem.Features.UserAnswers.Endpoints;
+using EduocationSystem.Infrastructure.ApplicationDBContext;
+using EduocationSystem.Infrastructure.CurrentUserService;
+using EduocationSystem.Infrastructure.Repositories;
+using EduocationSystem.Infrastructure.UnitOfWork;
+using EduocationSystem.Middlewares;
+using EduocationSystem.Shared.Data;
+using EduocationSystem.Shared.Helpers;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using OnlineExam.Domain;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Domain.Interfaces;
-using OnlineExam.Features.Accounts.Commands;
-using OnlineExam.Features.Accounts.Endpoints;
-using OnlineExam.Features.Categories.Endpoints;
-using OnlineExam.Features.Dashboard.Endpoints;
-using OnlineExam.Features.Exams.Endpoints;
-using OnlineExam.Features.Profile.Endpoints;
-using OnlineExam.Features.Questions.Endpoints;
-using OnlineExam.Features.UserAnswers.Endpoints;
-using OnlineExam.Infrastructure.ApplicationDBContext;
-using OnlineExam.Infrastructure.Repositories;
-using OnlineExam.Infrastructure.UnitOfWork;
-using OnlineExam.Middlewares;
-using OnlineExam.Shared.Data;
-using OnlineExam.Shared.Helpers;
 using Serilog;
 using Serilog.Events;
-using System.Configuration;
 using System.Reflection;
+using System.Security.Claims;
 using System.Text;
 
-namespace OnlineExam
+namespace EduocationSystem
 {
     public class Program
     {
         public static async Task Main(string[] args)
         {
-            // Serilog setup (unchanged)
+            #region Serilog setup (unchanged)
+
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
@@ -50,7 +54,11 @@ namespace OnlineExam
 
             Log.Information("Starting OnlineExam API application");
 
+            #endregion
+
             var builder = WebApplication.CreateBuilder(args);
+
+            #region Services
 
             builder.Host.UseSerilog();
             builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
@@ -65,6 +73,23 @@ namespace OnlineExam
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy =>
+                    policy.RequireRole("Admin"));
+
+                options.AddPolicy("StudentOnly", policy =>
+                    policy.RequireRole("Student"));
+
+                options.AddPolicy("ParentOnly", policy =>
+                    policy.RequireRole("Parent"));
+
+                options.AddPolicy("AdminOrStudent", policy =>
+                    policy.RequireRole("Admin", "Student"));
+
+                options.AddPolicy("AdminOrParent", policy =>
+                    policy.RequireRole("Admin", "Parent"));
+            });
 
 
             builder.Services.AddAuthentication(options =>
@@ -73,6 +98,8 @@ namespace OnlineExam
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; // Add this
             })
+
+
         .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
         {
             options.TokenValidationParameters = new TokenValidationParameters()
@@ -85,6 +112,8 @@ namespace OnlineExam
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(JwtOption.Secretkey)),
+                RoleClaimType = ClaimTypes.Role,    
+                NameClaimType = ClaimTypes.Name,
                 ClockSkew = TimeSpan.FromMinutes(5)
             };
 
@@ -132,6 +161,9 @@ namespace OnlineExam
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddMediatR(typeof(Program).Assembly);
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+
 
             // UnitOfWork first
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -157,8 +189,16 @@ namespace OnlineExam
             Log.Information("Registered {Count} generic repositories for entities: {Entities}", entityTypes.Count, string.Join(", ", entityTypes.Select(t => t.Name)));
             builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
+
+
+
+
+            #endregion
+
+
             var app = builder.Build();
 
+            #region Build
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -187,6 +227,7 @@ namespace OnlineExam
                     Log.Warning("⚠️ Application will continue without seeding");
                 }
             }
+
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
 
@@ -217,46 +258,82 @@ namespace OnlineExam
             app.UseMiddleware<ProfilingMiddleware>();
 
             app.MapControllers();
-            app.MapGet("/", () => "OnlineExam API is running...");
-            app.MapRegisterEndpoint(); // Map the register endpoint
-            app.MapLoginEndpoint(); // Map the login endpoint
-            app.MapConfirmEmailEndpoint(); // Map the confirm email endpoint
-            app.MapLogoutEndpoint(); // Map the logout endpoint
-            app.MapForgotPasswordEndpoint(); // Map the forgot password endpoint
-            app.MapResetPasswordEndpoint(); // Map the reset password endpoint
-            app.MapResendVerificationCodeEndpoint(); // Map the resend verification code endpoint
-           //profile endpoints
+
+            #region Mapping Endpoints
+
+            app.MapGet("/", () => "EduocationSystem API is running...");
+
+            // ===================== AUTH =====================
+            app.MapRegisterEndpoint();
+            app.MapLoginEndpoint();
+            app.MapConfirmEmailEndpoint();
+            app.MapLogoutEndpoint();
+            app.MapForgotPasswordEndpoint();
+            app.MapResetPasswordEndpoint();
+            app.MapResendVerificationCodeEndpoint();
+
+            // ===================== PROFILE =====================
             app.MapProfileEndpoint();
             app.MapUpdateProfileEndpoint();
-            //category endpoints
+
+            // ===================== CATEGORY =====================
             app.MapGetUserCategoriesEndpoint();
             app.MapGetCategoriesForAdminEndpoint();
             app.MapGetCategoryByIdEndpoint();
             app.MapCreateCategoryEndpoint();
             app.MapUpdateCategoryEndpoint();
             app.MapDeleteCategoryEndpoint();
-            // Register Exam endpoints
+
+            // ===================== EXAMS =====================
             app.MapUserExamEndpoints();
             app.MapAdminExamEndpoints();
             app.MapGetExamByIDEndpoint();
             app.MapStartExamAttemptEndpoint();
             app.MapSubmitExamEndpoint();
             app.MapCreateExamEndpoint();
-            app.MapDeleteExamEndpoint();
             app.MapEditExamEndpoint();
-            // Register Question endpoints
+            app.MapDeleteExamEndpoint();
+
+            // ===================== QUESTIONS =====================
             app.MapAdminQuestionEndpoint();
             app.MapAddQuestionEndpoint();
             app.MapUpdateQuestionEndpoint();
             app.MapDeleteQuestionEndpoint();
             app.MapGetQuestionDetailsEndpoint();
-            // Register UserAnswer endpoints
+
+            // ===================== USER ANSWERS =====================
             app.MapGetAllUserAnswersEndpoints();
             app.MapGetDetailedUserAnswerEndpoint();
-            // Register Dashboard endpoints
+
+            // ===================== DASHBOARD =====================
             app.MapDashboardStatsEndpoints();
             app.MapMostActiveExamsEndpoints();
             app.MapMostActiveCategoriesEndpoints();
+
+            // =====================================================
+            // ===================== STUDENTS ======================
+            app.MapStudentsEndpoints();
+
+            // ===================== PARENTS ======================
+           app.MapParentsEndpoints();
+
+            // ===================== ENROLLMENTS ======================
+            app.MapEnrollmentEndpoints();
+            // ===================== WEEKS ======================
+
+
+            // ===================== ATTENDANCE ======================
+            app.MapAttendanceEndpoints();
+
+
+            // ===================== GRADES ======================
+            app.MapGradesEndpoints();
+
+            // ===================== NOTIFICATIONS ======================
+
+
+            #endregion
+
 
             app.Use(async (ctx, next) =>
             {
@@ -269,6 +346,8 @@ namespace OnlineExam
                     await Results.ValidationProblem(dict).ExecuteAsync(ctx);
                 }
             });
+
+            #endregion
 
 
             app.Run();

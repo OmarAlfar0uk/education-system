@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace OnlineExam.Features.Questions.Queries
+namespace EduocationSystem.Features.Questions.Queries
 {
     public record GetQuestionTypesQuery(int id) :IRequest<string>;
     public class GetQuestionTypesHandler : IRequestHandler<GetQuestionTypesQuery, string>

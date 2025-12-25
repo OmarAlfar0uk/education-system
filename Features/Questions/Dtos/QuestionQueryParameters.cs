@@ -1,5 +1,5 @@
 ﻿// QuestionQueryParameters.cs
-namespace OnlineExam.Features.Questions.Queries
+namespace EduocationSystem.Features.Questions.Queries
 {
     public class QuestionQueryParameters
     {

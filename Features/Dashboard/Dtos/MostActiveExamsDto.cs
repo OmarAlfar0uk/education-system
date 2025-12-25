@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Features.Dashboard.Dtos
+﻿namespace EduocationSystem.Features.Dashboard.Dtos
 {
     public class MostActiveExamsDto
     {

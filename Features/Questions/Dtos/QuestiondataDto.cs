@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Features.Questions.Dtos
+﻿namespace EduocationSystem.Features.Questions.Dtos
 {
     public class QuestiondataDto
     {

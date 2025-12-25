@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 
-namespace OnlineExam.Domain.Entities
+namespace EduocationSystem.Domain.Entities
 {
     public class UserExamAttempt : BaseEntity
     {

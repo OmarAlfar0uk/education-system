@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using OnlineExam.Features.Dashboard.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Dashboard.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Dashboard.Queries
+namespace EduocationSystem.Features.Dashboard.Queries
 {
     public record GetMostActiveExamsQuery : IRequest<ServiceResponse<MostActiveExamsDto>>;
 }

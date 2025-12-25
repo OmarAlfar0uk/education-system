@@ -5,14 +5,14 @@ using Microsoft.Extensions.Options;
 using MimeKit;
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using OnlineExam.Domain;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Infrastructure.ApplicationDBContext;
-using OnlineExam.Shared.Helpers;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Domain.Entities;
+using EduocationSystem.Infrastructure.ApplicationDBContext;
+using EduocationSystem.Shared.Helpers;
+using EduocationSystem.Shared.Responses;
 using System.Text.Json;
 
-namespace OnlineExam.Features.Accounts.Commands
+namespace EduocationSystem.Features.Accounts.Commands
 {
     public record SendWelcomeEmailCommand(string Email, string FullName) : IRequest<ServiceResponse<bool>>
     {
@@ -201,7 +201,7 @@ namespace OnlineExam.Features.Accounts.Commands
                     <html>
                     <head>
                         <meta charset='utf-8'>
-                        <title>Welcome to OnlineExam</title>
+                        <title>Welcome to EducationalSystem</title>
                         <style>
                             body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
                             .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
@@ -214,7 +214,7 @@ namespace OnlineExam.Features.Accounts.Commands
                     <body>
                         <div class='container'>
                             <div class='header'>
-                                <h1>Welcome to OnlineExam!</h1>
+                                <h1>Welcome to EducationalSystem!</h1>
                             </div>
                             <div class='content'>
                                 <h2>Hello {fullName}!</h2>

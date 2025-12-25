@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OnlineExam.Domain.Interfaces;
-using OnlineExam.Infrastructure.ApplicationDBContext;
+using EduocationSystem.Domain.Interfaces;
+using EduocationSystem.Infrastructure.ApplicationDBContext;
 using System.Linq.Expressions;
 
-namespace OnlineExam.Infrastructure.Repositories
+namespace EduocationSystem.Infrastructure.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {

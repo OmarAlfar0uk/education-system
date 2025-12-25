@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Domain.Entities
+﻿namespace EduocationSystem.Domain.Entities
 {
     public enum EmailStatus { Pending, Sent, Failed }
     public enum EmailType { Verification, PasswordReset, Notification, Welcome }

@@ -1,13 +1,13 @@
 ﻿using MediatR;
-using OnlineExam.Domain;
-using OnlineExam.Domain.Interfaces;
-using OnlineExam.Features.Categories.Dtos;
-using OnlineExam.Features.Categories.Queries;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Domain.Interfaces;
+using EduocationSystem.Features.Categories.Dtos;
+using EduocationSystem.Features.Categories.Queries;
+using EduocationSystem.Shared.Responses;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
-namespace OnlineExam.Features.Categories.Handlers
+namespace EduocationSystem.Features.Categories.Handlers
 {
     public class GetCategoriesQueryForAdminHandler : IRequestHandler<GetCategoriesQueryForAdmin, ServiceResponse<PagedResult<AdminCategoryDto>>>
     {

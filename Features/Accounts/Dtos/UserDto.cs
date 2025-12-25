@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OnlineExam.Features.Accounts.Dtos
+namespace EduocationSystem.Features.Accounts.Dtos
 {
     public class UserDto
     {

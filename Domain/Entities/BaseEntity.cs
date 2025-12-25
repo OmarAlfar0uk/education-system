@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Domain.Entities
+﻿namespace EduocationSystem.Domain.Entities
 {
     public abstract class BaseEntity
     {

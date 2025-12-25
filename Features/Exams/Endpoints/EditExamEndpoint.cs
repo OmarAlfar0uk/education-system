@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OnlineExam.Features.Exams.Commands;
-using OnlineExam.Features.Exams.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Exams.Commands;
+using EduocationSystem.Features.Exams.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Exams.Endpoints
+namespace EduocationSystem.Features.Exams.Endpoints
 {
     public static class EditExamEndpoint
     {
@@ -19,6 +19,7 @@ namespace OnlineExam.Features.Exams.Endpoints
             })
             .WithTags("Exams")
             .WithSummary("Edit an existing exam")
+            .RequireAuthorization("AdminOnly")
             .Produces<ServiceResponse<bool>>(StatusCodes.Status200OK)
             .Produces<ServiceResponse<bool>>(StatusCodes.Status400BadRequest)
             .Produces<ServiceResponse<bool>>(StatusCodes.Status401Unauthorized)

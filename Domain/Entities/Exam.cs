@@ -1,8 +1,8 @@
-﻿using OnlineExam.Domain.Entities;
+﻿using EduocationSystem.Domain.Entities;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OnlineExam.Domain
+namespace EduocationSystem.Domain
 {
     public class Exam : BaseEntity
     {

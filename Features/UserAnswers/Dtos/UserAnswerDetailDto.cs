@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Features.UserAnswers.Dtos
+﻿namespace EduocationSystem.Features.UserAnswers.Dtos
 {
     public class UserAnswerDetailDto
     {

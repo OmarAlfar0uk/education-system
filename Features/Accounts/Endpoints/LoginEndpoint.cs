@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OnlineExam.Features.Accounts.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Accounts.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Accounts.Endpoints
+namespace EduocationSystem.Features.Accounts.Endpoints
 {
     public static class LoginEndpoint
     {

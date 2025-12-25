@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OnlineExam.Features.Categories.Commands;
-using OnlineExam.Features.Categories.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Categories.Commands;
+using EduocationSystem.Features.Categories.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Categories.Endpoints
+namespace EduocationSystem.Features.Categories.Endpoints
 {
     public static class CreateCategoryEndpoint
     {
@@ -14,7 +14,6 @@ namespace OnlineExam.Features.Categories.Endpoints
             {
                 try
                 {
-                    // Check if the request has form content type
                     if (!context.Request.HasFormContentType)
                     {
                         return Results.Json(
@@ -31,7 +30,6 @@ namespace OnlineExam.Features.Categories.Endpoints
                     var title = form["Title"].ToString();
                     var icon = form.Files["Icon"];
 
-                    // Basic validation
                     if (string.IsNullOrWhiteSpace(title))
                     {
                         return Results.Json(
@@ -65,7 +63,7 @@ namespace OnlineExam.Features.Categories.Endpoints
                     var result = await mediator.Send(new CreateCategoryCommand(createCategoryDto));
                     return Results.Json(result, statusCode: result.StatusCode);
                 }
-                catch (Exception ex)
+                catch
                 {
                     return Results.Json(
                         ServiceResponse<int>.InternalServerErrorResponse(
@@ -76,13 +74,15 @@ namespace OnlineExam.Features.Categories.Endpoints
                     );
                 }
             })
-            .DisableAntiforgery()
-            .WithName("CreateCategory")
-            .WithTags("Categories")
-            .Produces<ServiceResponse<int>>(StatusCodes.Status200OK)
-            .Produces<ServiceResponse<int>>(StatusCodes.Status400BadRequest)
-            .Produces<ServiceResponse<int>>(StatusCodes.Status401Unauthorized)
-            .ProducesValidationProblem();
+.DisableAntiforgery()
+.RequireAuthorization("AdminOnly")   // ⭐ هنا الرول
+.WithName("CreateCategory")
+.WithTags("Categories")
+.Produces<ServiceResponse<int>>(StatusCodes.Status200OK)
+.Produces<ServiceResponse<int>>(StatusCodes.Status400BadRequest)
+.Produces<ServiceResponse<int>>(StatusCodes.Status401Unauthorized)
+.ProducesValidationProblem();
+
         }
     }
 }

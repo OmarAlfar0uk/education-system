@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Domain.Enums
+﻿namespace EduocationSystem.Domain.Enums
 {
     public enum QuestionType
     {

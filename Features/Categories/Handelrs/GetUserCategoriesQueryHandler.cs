@@ -1,11 +1,11 @@
 ﻿using MediatR;
-using OnlineExam.Domain;
-using OnlineExam.Domain.Interfaces;
-using OnlineExam.Features.Categories.Dtos;
-using OnlineExam.Features.Categories.Queries;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Domain.Interfaces;
+using EduocationSystem.Features.Categories.Dtos;
+using EduocationSystem.Features.Categories.Queries;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Categories.Handlers
+namespace EduocationSystem.Features.Categories.Handlers
 {
     public class GetUserCategoriesQueryHandler : IRequestHandler<GetUserCategoriesQuery, ServiceResponse<PagedResult<UserCategoryDto>>>
     {

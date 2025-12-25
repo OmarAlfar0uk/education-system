@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using OnlineExam.Features.Categories.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Categories.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Categories.Queries
+namespace EduocationSystem.Features.Categories.Queries
 {
     public record GetUserCategoriesQuery(int PageNumber = 1, int PageSize = 20)
         : IRequest<ServiceResponse<PagedResult<UserCategoryDto>>>;

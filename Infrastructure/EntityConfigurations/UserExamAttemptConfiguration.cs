@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnlineExam.Domain.Entities;
+using EduocationSystem.Domain.Entities;
 
-namespace OnlineExam.Infrastructure.EntityConfigurations
+namespace EduocationSystem.Infrastructure.EntityConfigurations
 {
     public class UserExamAttemptConfiguration : IEntityTypeConfiguration<UserExamAttempt>
     {

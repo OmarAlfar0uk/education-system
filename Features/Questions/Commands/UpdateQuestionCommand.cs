@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using OnlineExam.Features.Questions.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Questions.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Questions.Commands
+namespace EduocationSystem.Features.Questions.Commands
 {
     public record UpdateQuestionCommand(int QuestionId, UpdateQuestionDto QuestionDto)
         : IRequest<ServiceResponse<QuestiondataDto>>;

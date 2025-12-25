@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using OnlineExam.Features.Categories.Dtos;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Categories.Dtos;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Categories.Queries
+namespace EduocationSystem.Features.Categories.Queries
 {
     public record GetCategoryByIdQuery(int Id) : IRequest<ServiceResponse<CategoryDetailsDto>>;
 }

@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity.Data;
-using OnlineExam.Features.Accounts.Commands;
-using OnlineExam.Features.Accounts.Dtos;
-using OnlineExam.Features.Accounts.Orchestrators;
+using EduocationSystem.Features.Accounts.Commands;
+using EduocationSystem.Features.Accounts.Dtos;
+using EduocationSystem.Features.Accounts.Orchestrators;
 
-namespace OnlineExam.Features.Accounts.Endpoints
+namespace EduocationSystem.Features.Accounts.Endpoints
 {
     public static class RegisterEndpoint
     {

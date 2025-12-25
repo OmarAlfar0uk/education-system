@@ -4,15 +4,15 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Features.Accounts.Commands;
-using OnlineExam.Features.Accounts.Dtos;
-using OnlineExam.Infrastructure.ApplicationDBContext;
-using OnlineExam.Shared.Helpers;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain.Entities;
+using EduocationSystem.Features.Accounts.Commands;
+using EduocationSystem.Features.Accounts.Dtos;
+using EduocationSystem.Infrastructure.ApplicationDBContext;
+using EduocationSystem.Shared.Helpers;
+using EduocationSystem.Shared.Responses;
 using System.Text.Json;
 
-namespace OnlineExam.Features.Accounts.Orchestrators
+namespace EduocationSystem.Features.Accounts.Orchestrators
 {
     public record ResetPasswordOrchestrator(ResetPasswordDto Dto) : IRequest<ServiceResponse<bool>>;
     public class ResetPasswordOrchestratorHandler : IRequestHandler<ResetPasswordOrchestrator, ServiceResponse<bool>>

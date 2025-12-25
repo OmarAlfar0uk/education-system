@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Features.Exams.Queries
+﻿namespace EduocationSystem.Features.Exams.Queries
 {
     public class GetExamByIdQuery
     {

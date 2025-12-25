@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Shared.Extensions
+namespace EduocationSystem.Shared.Extensions
 {
     /// <summary>
     /// Extension methods for ServiceResponse to easily convert to ActionResult

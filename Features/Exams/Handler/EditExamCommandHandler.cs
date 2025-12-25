@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using OnlineExam.Domain;
-using OnlineExam.Domain.Interfaces;
-using OnlineExam.Features.Exams.Commands;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Domain;
+using EduocationSystem.Domain.Interfaces;
+using EduocationSystem.Features.Exams.Commands;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Exams.Handlers
+namespace EduocationSystem.Features.Exams.Handlers
 {
     public class EditExamCommandHandler : IRequestHandler<EditExamCommand, ServiceResponse<bool>>
     {

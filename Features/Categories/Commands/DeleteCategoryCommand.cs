@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Categories.Commands
+namespace EduocationSystem.Features.Categories.Commands
 {
     public record DeleteCategoryCommand(int Id) : IRequest<ServiceResponse<bool>>;
 }

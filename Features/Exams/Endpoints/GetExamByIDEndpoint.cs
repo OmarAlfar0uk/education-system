@@ -1,18 +1,18 @@
 ﻿using MediatR;
-using OnlineExam.Features.Exams.Dtos;
-using OnlineExam.Features.Exams.Queries;
-using OnlineExam.Shared.Responses;
+using EduocationSystem.Features.Exams.Dtos;
+using EduocationSystem.Features.Exams.Queries;
+using EduocationSystem.Shared.Responses;
 
-namespace OnlineExam.Features.Exams.Endpoints
+namespace EduocationSystem.Features.Exams.Endpoints
 {
     public static class GetExamByIDEndpoint
     {
         public static void MapGetExamByIDEndpoint(this WebApplication app)
         {
             var group = app.MapGroup("/api/exams")
-                .WithTags("Exams");
+                .WithTags("Exams")
+                .RequireAuthorization("AdminOrStudent");   // ⭐ Admin + Student
 
-            // GET /api/exams/{id} - Get exam details
             group.MapGet("/{id}", async (int id, IMediator mediator) =>
             {
                 var result = await mediator.Send(new GetExamDetailsQuery(id));
@@ -20,8 +20,10 @@ namespace OnlineExam.Features.Exams.Endpoints
             })
             .WithName("GetExamDetails")
             .Produces<ServiceResponse<UserExamDetailsDto>>(StatusCodes.Status200OK)
+            .Produces<ServiceResponse<UserExamDetailsDto>>(StatusCodes.Status401Unauthorized)
+            .Produces<ServiceResponse<UserExamDetailsDto>>(StatusCodes.Status403Forbidden)
             .Produces<ServiceResponse<UserExamDetailsDto>>(StatusCodes.Status404NotFound);
         }
-
     }
+
 }

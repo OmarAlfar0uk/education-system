@@ -1,4 +1,4 @@
-﻿namespace OnlineExam.Middlewares
+﻿namespace EduocationSystem.Middlewares
 {
     public class RateLimitingMiddleware
     {
