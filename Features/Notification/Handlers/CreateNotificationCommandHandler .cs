@@ -1,7 +1,9 @@
 ﻿    using EduocationSystem.Domain.Interfaces;
 using EduocationSystem.Features.Notification.Commend;
+using EduocationSystem.Features.Notification.Hubs;
 using EduocationSystem.Shared.Responses;
 using MediatR;
+using Microsoft.AspNetCore.SignalR;
 
 namespace EduocationSystem.Features.Notification.Handlers
 {
@@ -10,6 +12,21 @@ namespace EduocationSystem.Features.Notification.Handlers
     {
         private readonly IGenericRepository<Domain.Entities.Notification> _notificationRepo;
         private readonly IUnitOfWork _uow;
+
+
+        private readonly IHubContext<NotificationHub> _hub;
+
+        public CreateNotificationCommandHandler(
+            IGenericRepository<Domain.Entities.Notification> notificationRepo,
+            IUnitOfWork uow,
+            IHubContext<NotificationHub> hub)
+        {
+            _notificationRepo = notificationRepo;
+            _uow = uow;
+            _hub = hub;
+        }
+
+
 
         public CreateNotificationCommandHandler(
             IGenericRepository<Domain.Entities.Notification> notificationRepo,
@@ -33,6 +50,18 @@ namespace EduocationSystem.Features.Notification.Handlers
 
             await _notificationRepo.AddAsync(notification);
             await _uow.SaveChangesAsync();
+
+
+            await _hub.Clients
+            .User(notification.UserId)
+            .SendAsync("NewNotification", new
+            {
+                notification.Id,
+                notification.Title,
+                notification.Body,
+                notification.IsRead,
+                notification.CreatedAt
+            });
 
             return ServiceResponse<bool>.SuccessResponse(
                 true,

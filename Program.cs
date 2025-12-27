@@ -9,14 +9,16 @@ using EduocationSystem.Features.Enrollment;
 using EduocationSystem.Features.Exams.Endpoints;
 using EduocationSystem.Features.Grade;
 using EduocationSystem.Features.Notification;
+using EduocationSystem.Features.Notification.Hubs;
 using EduocationSystem.Features.Parent.Endpoints;
 using EduocationSystem.Features.Profile.Endpoints;
 using EduocationSystem.Features.Questions.Endpoints;
 using EduocationSystem.Features.Students.Endpoints;
 using EduocationSystem.Features.UserAnswers.Endpoints;
 using EduocationSystem.Infrastructure.ApplicationDBContext;
-using EduocationSystem.Infrastructure.CurrentUserService;
 using EduocationSystem.Infrastructure.Repositories;
+using EduocationSystem.Infrastructure.Service;
+using EduocationSystem.Infrastructure.Servies;
 using EduocationSystem.Infrastructure.UnitOfWork;
 using EduocationSystem.Middlewares;
 using EduocationSystem.Shared.Data;
@@ -159,11 +161,17 @@ namespace EduocationSystem
 
             builder.Services.AddMemoryCache();
             builder.Services.AddControllers();
+            builder.Services.AddSignalR();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddMediatR(typeof(Program).Assembly);
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+            builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.AddScoped<IEmailQueueService, EmailQueueService>();
+            builder.Services.AddHostedService<EmailBackgroundWorker>();
+            builder.Services.AddScoped< NotificationService>();
+            builder.Services.AddHostedService<EmailBackgroundWorker>();
 
 
             // UnitOfWork first
@@ -332,6 +340,7 @@ namespace EduocationSystem
 
             // ===================== NOTIFICATIONS ======================
             app.MapNotificationsEndpoints();
+            app.MapHub<NotificationHub>("/hubs/notifications");
 
 
             #endregion

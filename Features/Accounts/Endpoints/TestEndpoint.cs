@@ -1,6 +1,9 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
+﻿using EduocationSystem.Domain.Entities;
+using EduocationSystem.Domain.Interfaces;
 using EduocationSystem.Features.Accounts.Commands;
+using EduocationSystem.Infrastructure.Service;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using System.Net;
 
 namespace EduocationSystem.Features.Accounts.Endpoints
@@ -17,6 +20,28 @@ namespace EduocationSystem.Features.Accounts.Endpoints
             //{
             //    await mediator.Send(new LogoutCommand("hello logout"));
             //});
+
+            app.MapPost("/api/test-email", async (string email, IEmailQueueService queue) =>
+            {
+                var template = EmailTemplateHelper.LoadTemplate("Welcome.html");
+
+                template = EmailTemplateHelper.ReplaceTokens(template, new()
+    {
+        {"name", "Test User"}
+    });
+
+                await queue.QueueAsync(new EmailQueue
+                {
+                    ToEmail = email,
+                    Subject = "Test Email",
+                    Body = template,
+                    EmailType = EmailType.Notification
+                });
+
+                return Results.Ok("Queued!");
+            }).RequireAuthorization("AdminOnly");
+
+
 
         }
     }

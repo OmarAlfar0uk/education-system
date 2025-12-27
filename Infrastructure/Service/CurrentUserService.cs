@@ -1,6 +1,6 @@
 ﻿using EduocationSystem.Domain.Interfaces;
 
-namespace EduocationSystem.Infrastructure.CurrentUserService
+namespace EduocationSystem.Infrastructure.Servies
 {
     public class CurrentUserService : ICurrentUserService
     {
