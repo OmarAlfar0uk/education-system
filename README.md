@@ -12,7 +12,6 @@
 <p align="center">
   <a href="#-key-features">Key Features</a> •
   <a href="#-system-architecture">System Architecture</a> •
-  <a href="#-domain-model">Domain Model</a> •
   <a href="#-tech-stack">Tech Stack</a> •
   <a href="#-getting-started">Getting Started</a> •
   <a href="#-author">Author</a>
