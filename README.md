@@ -102,19 +102,9 @@ flowchart TD
    cd education-system
    ```
 
-2. **Configure Settings:**
-   Configure connection string in `appsettings.json`:
-   ```json
-   {
-     "ConnectionStrings": {
-       "DefaultConnection": "Server=localhost;Database=EducationSystemDb;Trusted_Connection=True;TrustServerCertificate=True;"
-     }
-   }
-   ```
-
-3. **Update Database & Launch:**
+2. **Restore & Run:**
    ```bash
-   dotnet ef database update
+   dotnet restore
    dotnet run
    ```
 
